@@ -63,6 +63,10 @@ class MovingAgent(Agent):
             self.next_position = (self.pos[0] - 1, self.pos[1])
 
     def jsonify(self):
+        pos_x, pos_y = 0, 0
+        if not self.pos is None:
+            pos_x, pos_y = self.pos
+        
         json = {
             "unique_id": self.unique_id,
             "destination": {
@@ -70,8 +74,8 @@ class MovingAgent(Agent):
                 "y": self.destination[1],
             },
             "position": {
-                "x": self.pos[0],
-                "y": self.pos[1],
+                "x": pos_x,
+                "y": pos_y,
             },
         }
 

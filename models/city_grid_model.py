@@ -7,9 +7,8 @@ from typing import Tuple
 
 import numpy as np
 
-from agents.car import Car
+from agents.car import Car, Person
 from agents.cell import Cell
-from agents.person import Person
 
 
 def get_status_grid(model):
