@@ -115,6 +115,10 @@ class CityGridModel(Model):
                 self.schedule.remove(agent)
                 self.grid.remove_agent(agent)
                 self.agents_to_remove.remove(agent)
+                # if isinstance(agent, Car):
+                #     self.cars.remove(agent)
+                # elif isinstance(agent, Person):
+                #     self.people.remove(agent)
 
         if len(self.agents_to_place):
             for drop_off in self.agents_to_place:

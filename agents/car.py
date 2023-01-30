@@ -37,9 +37,9 @@ class Car(MovingAgent):
             include_center=False
         )
         for neighbor in neighbors:
-            if isinstance(neighbor, Car) and neighbor.state != Car.States.Stopped and self.is_in_same_direction(self, neighbor):
-                self.next_state = Car.States.Stopped
-                return True
+            # if isinstance(neighbor, Car) and self.is_in_same_direction(self, neighbor) and neighbor.state != Car.States.Inactive:
+            #     self.next_state = Car.States.Stopped
+            #     return True
 
             if isinstance(neighbor, Cell) and neighbor.category == Cell.Category.Intersection:
                 if neighbor.is_green != self.direction and self.get_direction_to_position(self.pos, neighbor.pos) == self.direction:
@@ -88,6 +88,7 @@ class Car(MovingAgent):
             for person in self.people_on_board:
                 self.offboard(person)
             self.next_state = Car.States.Inactive
+            # self.model.eventually_remove(self)
             return
 
             # A lo mejor no es necesario?
@@ -259,6 +260,6 @@ class Person(MovingAgent):
     def jsonify(self):
         json = super().jsonify()
 
-        json["is_onboard"] = self.state == Person.States.Onboard
-
+        json["is_onboard"] = self.pos is None
+        json["direction"] = self.direction
         return json
